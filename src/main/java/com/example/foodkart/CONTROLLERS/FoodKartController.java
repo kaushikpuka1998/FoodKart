@@ -6,7 +6,6 @@ import com.example.foodkart.ENTITY.User;
 import com.example.foodkart.SERVICES.FoodKartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +23,7 @@ public class FoodKartController {
 
     @PostMapping("/loginUser")
     public ResponseEntity loginUser(@RequestBody User user) {
-        return ResponseEntity.ok(foodkartService.loginUserUser(user));
+        return ResponseEntity.ok(foodkartService.loginUser(user));
     }
 
     @PostMapping("/registerRestaurant")
@@ -52,8 +51,8 @@ public class FoodKartController {
         foodkartService.placeOrder(restaurantName, quantity);
     }
 
-    @GetMapping("/orderHistory")
-    public List<Order> getOrderHistory() {
-        return foodkartService.getorderHistory();
+    @GetMapping("/orderHistory/{phoneNumber}")
+    public List<Order> getOrderHistory(@PathVariable String phoneNumber) {
+        return foodkartService.getOrderHistory(phoneNumber);
     }
 }
